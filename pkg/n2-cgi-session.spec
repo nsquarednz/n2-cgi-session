@@ -10,6 +10,10 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %global _binaries_in_noarch_packages_terminate_build 0
 
+#BuildRequires:
+# Define some dependencies that we require in order to use this module.
+Requires: perl(CGI) perl(Data::Dumper) perl(Digest::MD5)
+
 %description
 N-Squared Software fork of 4.4.x of the Perl CGI Session library.
 
