@@ -1,5 +1,7 @@
+# $Id$
+
 use strict;
-use diagnostics;
+
 
 use File::Spec;
 use Test::More;
@@ -15,11 +17,8 @@ for ( "DBI", "DBD::SQLite" ) {
     }
 }
 
-my $dir_name = File::Spec->tmpdir;
-my $file_name= File::Spec->catfile($dir_name, 'sessions.sqlt');
-
 my %dsn = (
-    DataSource  => "dbi:SQLite:dbname=$file_name",
+    DataSource  => "dbi:SQLite:dbname=" . File::Spec->catfile('t', 'sessiondata', 'sessions.sqlt'),
     TableName   => 'sessions'
 );
 
@@ -106,5 +105,3 @@ plan tests => $t->number_of_tests + 4;
 $dbh = DBI->connect($dsn{DataSource}, undef, undef, {RaiseError=>1, PrintError=>1});
 
 $t->run();
-
-unlink $file_name;

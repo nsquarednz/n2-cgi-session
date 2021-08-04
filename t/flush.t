@@ -1,10 +1,9 @@
-use File::Path;
 use File::Spec;
 use Test::More qw/no_plan/;
 use strict;
 
 use CGI::Session;
-my $dir = File::Spec->catdir('t', 'sessiondata');
+my $dir = File::Spec->tmpdir();
 my $id;
 {
     my $ses = CGI::Session->new(undef,undef,{Directory=> $dir });
@@ -12,6 +11,8 @@ my $id;
     ok($id, "found session id");
 }
 
-ok(-r "$dir/cgisess_".$id, "found session data file");
+my $file = "$dir/cgisess_".$id;
+ok(-r $file, "found session data file");
+unlink $file;
 
-rmtree $dir;
+

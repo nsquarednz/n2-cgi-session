@@ -1,8 +1,7 @@
 use strict;
-use diagnostics;
+
 
 use Test::More;
-use File::Path;
 use File::Spec;
 use CGI::Session::Test::Default;
 

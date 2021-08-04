@@ -1,12 +1,14 @@
 package CGI::Session::ID::incr;
 
+# $Id$
+
 use strict;
 use File::Spec;
 use Carp "croak";
 use Fcntl qw( :DEFAULT :flock );
 use CGI::Session::ErrorHandler;
 
-$CGI::Session::ID::incr::VERSION = '4.45';
+$CGI::Session::ID::incr::VERSION = '4.43';
 @CGI::Session::ID::incr::ISA     = qw( CGI::Session::ErrorHandler );
 
 

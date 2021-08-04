@@ -1,5 +1,7 @@
+# $Id$
+
 use strict;
-use diagnostics;
+
 
 use Test::More 'no_plan';
 
@@ -10,7 +12,7 @@ use CGI::Session;
 {
     my $s = CGI::Session->load('Driver:file;serial:FreezeThaw',undef, Directory=> 'wrong' );
     is($s,undef, "undefined session is created with wrong number of args to load");
-    like(CGI::Session->errstr, qr/3rd parameter/, "expected error is returned for wrong type of parameter");
+    like(CGI::Session->errstr, qr/Too many/, "expected error is returned for too many args");
     unlike(CGI::Session->errstr, qr/new/, "don't mention new() in error when load() fails directly.");
 }
 {

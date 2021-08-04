@@ -24,7 +24,9 @@ lib/CGI/Session/Tutorial.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
+META.json
 META.yml
+MYMETA.json
 README
 t/api3_db_file.t
 t/api3_db_file_freezethaw.t

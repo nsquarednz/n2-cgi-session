@@ -1,19 +1,18 @@
 use strict;
-use File::Path;
-use File::Spec;
-use Test::More ('no_plan');
+use Test::More 'no_plan';
 
-BEGIN {
-    use_ok('CGI::Session');
-    use_ok("CGI::Session::Driver");
-    use_ok("CGI::Session::Driver::file");
-}
+#  This test is about checking {Directory=>/not_tmp} actually works;
+#  Reference: http://rt.cpan.org/Public/Bug/Display.html?id=24285
 
-my($dir_name) = File::Spec->catdir('t', 'sessiondata');
+use CGI::Session;
+use CGI::Session::Driver;
+use CGI::Session::Driver::file;
 
 my $opt_dsn;
 my $id;
 my $file_name;
+
+ my($dir_name) = File::Spec->catdir('t', 'sessiondata');
 
 {
     $opt_dsn = {Directory=>$dir_name};
@@ -21,9 +20,8 @@ my $file_name;
     ok(my $s = CGI::Session->new('driver:file;serializer:default', undef, $opt_dsn), 'Created CGI::Session object successfully');
 
     $id        = $s -> id();
-    $file_name = "t/sessiondata/cgisess_$id";
+    $file_name = File::Spec->catdir($dir_name, "cgisess_$id");
 }
 
 ok(-e $file_name, 'Created file outside /tmp successfully');
-
-rmtree $dir_name;
+unlink $file_name;

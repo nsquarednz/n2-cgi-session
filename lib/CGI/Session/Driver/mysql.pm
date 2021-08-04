@@ -1,11 +1,13 @@
 package CGI::Session::Driver::mysql;
 
+# $Id$
+
 use strict;
 use Carp;
 use CGI::Session::Driver::DBI;
 
 @CGI::Session::Driver::mysql::ISA       = qw( CGI::Session::Driver::DBI );
-$CGI::Session::Driver::mysql::VERSION   = '4.45';
+$CGI::Session::Driver::mysql::VERSION   = '4.43';
 
 sub _mk_dsnstr {
     my ($class, $dsn) = @_;
@@ -41,13 +43,13 @@ sub init {
 
 sub store {
     my $self = shift;
-    my ($sid, $datastr, $etime) = @_;
+    my ($sid, $datastr) = @_;
     croak "store(): usage error" unless $sid && $datastr;
 
     my $dbh = $self->{Handle};
     $dbh->do("INSERT INTO " . $self->table_name .
-             " ($self->{IdColName}, $self->{DataColName}) VALUES(?, ?) ON DUPLICATE KEY UPDATE $self->{DataColName} = ?",
-             undef, $sid, $datastr, $datastr)
+			 " ($self->{IdColName}, $self->{DataColName}) VALUES(?, ?) ON DUPLICATE KEY UPDATE $self->{DataColName} = ?",
+			 undef, $sid, $datastr, $datastr)
         or return $self->set_error( "store(): \$dbh->do failed " . $dbh->errstr );
     return 1;
 }
@@ -130,7 +132,7 @@ See the documentation for CGI::Session::Driver::DBI for details.
 In particular, the new syntax for C<new()> applies to all database drivers, whereas the old - and bad -
 global variable method only applied to MySQL.
 
-Alternately, call $session->table_name('new_name') just after creating the session object if you wish to
+Alternately, call $session -> table_name('new_name') just after creating the session object if you wish to
 change the session table's name.
 
 =head1 LICENSING
