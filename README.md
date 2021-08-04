@@ -7,6 +7,7 @@ To build an RPM package for a target system the RPM must be build on the target 
 `cd pkg`
 `./build-packages.sh x.x.x x`
 
+Ported Readme Notes:
 ```
 SYNOPSIS
         # Object initialization:
