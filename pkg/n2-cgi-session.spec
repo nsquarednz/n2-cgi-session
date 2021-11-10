@@ -1,11 +1,12 @@
 Name: %(echo $PACKAGE)
 Version: %(echo $VERSION)
-Release: %(echo $RELEASE)
+# Release is passed through to our script. We concatenate on the dist flag.
+# Dist is a magic variable that will populate our version. I.E. EL8.
+Release: %(echo $RELEASE)%{?dist}
 Summary: Persistent session data in CGI applications.
 Group: Development/Languages/Perl
 License: Perl
 URL: https://metacpan.org/pod/CGI::Session
-BuildArch: x86_64
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %global _binaries_in_noarch_packages_terminate_build 0
