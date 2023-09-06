@@ -11,6 +11,10 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %global _binaries_in_noarch_packages_terminate_build 0
 
+#BuildProvides:
+# Define the export that this module provides.
+Provides: perl(CGI::Session)
+
 #BuildRequires:
 # Define some dependencies that we require in order to use this module.
 Requires: perl(CGI) perl(Data::Dumper) perl(Digest::MD5)
